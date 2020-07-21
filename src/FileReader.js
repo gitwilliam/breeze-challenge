@@ -7,7 +7,7 @@ class FileReader extends React.Component {
     this.state = {
       csvfile: undefined
     };
-    this.updateData = this.updateData.bind(this);
+    this.sendData = this.sendData.bind(this);
   }
 
   handleChange = event => {
@@ -19,14 +19,22 @@ class FileReader extends React.Component {
   importCSV = () => {
     const { csvfile } = this.state;
     Papa.parse(csvfile, {
-      complete: this.updateData,
+      complete: this.sendData,
       header: true
     });
   };
 
-  updateData(result) {
-    var data = result.data;
-    console.log(data);
+  sendData(result) {
+    result.data.forEach((p) => {
+        fetch('http://127.0.0.1:8000/api/people/', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(p)
+        })
+    });
   }
 
   render() {
