@@ -11,6 +11,21 @@ use App\Models\Group;
 
 class GroupsController extends Controller
 {
+    // Route::get('groups/{id}/members', function($id) {
+    //     return Article::find($id);
+    // });
+
+    /**
+     * Display a listing of the members of a group.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function members($id)
+    {
+        $members = Group::where('id', $id)->first()->members;
+        return response()->json(["data" => $members], 200);
+    }
+
     /**
      * Display a listing of the resource.
      *

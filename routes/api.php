@@ -14,4 +14,5 @@ use Illuminate\Http\Request;
 */
 
 Route::resource('people', 'PeopleController');
+Route::get('groups/{id}/members', 'GroupsController@members');
 Route::resource('groups', 'GroupsController');
