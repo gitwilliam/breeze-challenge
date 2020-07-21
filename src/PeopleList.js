@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Table } from 'semantic-ui-react'
 import _ from 'lodash'
 
-class ResultsList extends Component {
+class PeopleList extends Component {
     constructor(props) {
         super(props);
         this.state = { column: null, data: [], direction: null };
@@ -41,7 +41,7 @@ class ResultsList extends Component {
               <Table.Header>
                 <Table.Row>
                 <Table.HeaderCell sorted={column === 'first_name' ? direction : null}
-                  onClick={this.handleSort('firest_name')} singleLine>First Name</Table.HeaderCell>
+                  onClick={this.handleSort('first_name')} singleLine>First Name</Table.HeaderCell>
                 <Table.HeaderCell sorted={column === 'last_name' ? direction : null}
                   onClick={this.handleSort('last_name')}>Last Name</Table.HeaderCell>
                 <Table.HeaderCell sorted={column === 'email_address' ? direction : null}
@@ -73,4 +73,4 @@ class ResultsList extends Component {
 
 }
 
-export default ResultsList
+export default PeopleList

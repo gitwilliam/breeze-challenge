@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import PeopleList from "./PeopleList";
-import Dropzone from "./Dropzone";
+import GroupsList from "./GroupsList";
 import FileReader from "./FileReader";
 
 class ResultsList extends Component {
@@ -13,7 +13,7 @@ class ResultsList extends Component {
         return (
           <>
           <PeopleList />
-          <Dropzone />
+          <GroupsList />
           <FileReader />
           </>
         );
