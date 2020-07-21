@@ -5,8 +5,10 @@
   "dependencies": {
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
+    "papaparse": "^5.2.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-dropzone": "^11.0.2",
     "react-scripts": "3.4.1",
     "react-test-renderer": "^16.13.1",
     "semantic-ui-react": "^0.88.2"
