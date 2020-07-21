@@ -12,7 +12,7 @@ class PeopleList extends Component {
       if (this.props.group_id) {
         fetch("http://localhost:8000/api/groups/" + this.props.group_id + "/members")
           .then(response => response.json())
-          .then(data => this.setState({ data: data.data }));
+          .then(data => this.setState({ data: data.data.filter(d => d.status === 'active') }));
       } else {
         fetch("http://localhost:8000/api/people")
           .then(response => response.json())

@@ -12,9 +12,9 @@ class ResultsList extends Component {
     render() {
         return (
           <>
+          <FileReader />
           <PeopleList />
           <GroupsList />
-          <FileReader />
           </>
         );
 }
