@@ -25,23 +25,36 @@ class FileReader extends React.Component {
   };
 
   sendData(result) {
-    result.data.forEach((p) => {
-        fetch('http://127.0.0.1:8000/api/people/', {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(p)
-        })
-    });
+      if (result.meta.fields.includes("first_name") && result.meta.fields.includes("last_name")) {
+          result.data.forEach((p) => {
+              fetch('http://127.0.0.1:8000/api/people/', {
+                  method: 'POST',
+                  headers: {
+                      'Accept': 'application/json',
+                      'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(p)
+              })
+          });
+      } else if (result.meta.fields.includes("group_name") && !result.meta.fields.includes("first_name")) {
+          result.data.forEach((p) => {
+              fetch('http://127.0.0.1:8000/api/groups/', {
+                  method: 'POST',
+                  headers: {
+                      'Accept': 'application/json',
+                      'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(p)
+              })
+          });
+      }
   }
 
   render() {
     console.log(this.state.csvfile);
     return (
       <div className="App">
-        <h2>Import CSV File!</h2>
+        <h2>Import User or Group CSV file</h2>
         <input
           className="csv-input"
           type="file"
@@ -53,7 +66,7 @@ class FileReader extends React.Component {
           onChange={this.handleChange}
         />
         <p />
-        <button onClick={this.importCSV}> Upload now!</button>
+        <button onClick={this.importCSV}> Upload</button>
       </div>
     );
   }
