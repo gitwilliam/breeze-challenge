@@ -11,10 +11,6 @@ use App\Models\Group;
 
 class GroupsController extends Controller
 {
-    // Route::get('groups/{id}/members', function($id) {
-    //     return Article::find($id);
-    // });
-
     /**
      * Display a listing of the members of a group.
      *
