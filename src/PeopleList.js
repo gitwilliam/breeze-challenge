@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { Table } from 'semantic-ui-react'
+import _ from 'lodash'
 
 class ResultsList extends Component {
     constructor(props) {
         super(props);
-        this.state = { data: [] };
+        this.state = { column: null, data: [], direction: null };
     }
 
     componentDidMount() {
@@ -13,17 +14,40 @@ class ResultsList extends Component {
           .then(data => this.setState({ data: data.data }));
     }
 
+    handleSort = (clickedColumn) => () => {
+      const { column, data, direction } = this.state
+
+      if (column !== clickedColumn) {
+        this.setState({
+          column: clickedColumn,
+          data: _.sortBy(data, [clickedColumn]),
+          direction: 'ascending',
+        })
+
+        return
+      }
+
+      this.setState({
+        data: data.reverse(),
+        direction: direction === 'ascending' ? 'descending' : 'ascending',
+      })
+    }
+
     render() {
-        var data = this.state.data || [];
+        const { column, data, direction } = this.state
 
         return (
-            <Table celled padded>
+            <Table celled padded sortable>
               <Table.Header>
                 <Table.Row>
-                  <Table.HeaderCell singleLine>First Name</Table.HeaderCell>
-                  <Table.HeaderCell>Last Name</Table.HeaderCell>
-                  <Table.HeaderCell>Email</Table.HeaderCell>
-                  <Table.HeaderCell>Status</Table.HeaderCell>
+                <Table.HeaderCell sorted={column === 'first_name' ? direction : null}
+                  onClick={this.handleSort('firest_name')} singleLine>First Name</Table.HeaderCell>
+                <Table.HeaderCell sorted={column === 'last_name' ? direction : null}
+                  onClick={this.handleSort('last_name')}>Last Name</Table.HeaderCell>
+                <Table.HeaderCell sorted={column === 'email_address' ? direction : null}
+                  onClick={this.handleSort('email_address')}>Email</Table.HeaderCell>
+                <Table.HeaderCell sorted={column === 'status' ? direction : null}
+                  onClick={this.handleSort('status')}>Status</Table.HeaderCell>
                 </Table.Row>
               </Table.Header>
 
