@@ -9,7 +9,10 @@ class GroupsList extends Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:8000/api/groups")
+        // fetch("http://localhost:8000/api/groups")
+        //   .then(response => response.json())
+        //   .then(data => this.setState({ data: data.data }));
+        fetch("http://localhost:8000/api/groups/members")
           .then(response => response.json())
           .then(data => this.setState({ data: data.data }));
     }
@@ -41,10 +44,7 @@ class GroupsList extends Component {
               <Table.Header>
                 <Table.Row>
                 <Table.HeaderCell sorted={column === 'group_name' ? direction : null}
-                  onClick={this.handleSort('group_name')} rowSpan='2'>Group Name</Table.HeaderCell>
-                <Table.HeaderCell colSpan='3'>People</Table.HeaderCell>
-                </Table.Row>
-                <Table.Row>
+                  onClick={this.handleSort('group_name')}>Group Name</Table.HeaderCell>
                 <Table.HeaderCell sorted={column === 'first_name' ? direction : null}
                   onClick={this.handleSort('first_name')}>First Name</Table.HeaderCell>
                 <Table.HeaderCell sorted={column === 'last_name' ? direction : null}
@@ -58,33 +58,39 @@ class GroupsList extends Component {
 
               {
                   data.map((group, index) => {
+                    if (group.members.length === 0) {
                       return (
-                        <>
-                          <Table.Row key={index}>
-                            <Table.Cell rowSpan='3'>{ group.group_name }</Table.Cell>
-                            <Table.Cell>A</Table.Cell>
-                            <Table.Cell>The Builder</Table.Cell>
-                            <Table.Cell>bob@bob.com</Table.Cell>
-                          </Table.Row>
-                          <Table.Row>
-                            <Table.Cell>C</Table.Cell>
-                            <Table.Cell>The Builder</Table.Cell>
-                            <Table.Cell>bob@bob.com</Table.Cell>
-                          </Table.Row>
-                          <Table.Row>
-                            <Table.Cell>E</Table.Cell>
-                            <Table.Cell>The Builder</Table.Cell>
-                            <Table.Cell>bob@bob.com</Table.Cell>
-                          </Table.Row>
-                          </>
-                          // <Table.Row key={index}>
-                          //     <Table.Cell singleLine>{ person.first_name }</Table.Cell>
-                          //     <Table.Cell singleLine>{ person.last_name }</Table.Cell>
-                          //     <Table.Cell singleLine>{ person.email_address }</Table.Cell>
-                          //     <Table.Cell singleLine>{ person.status }</Table.Cell>
-                          // </Table.Row>
-                      );
-                    })
+                        <Table.Row key={index}>
+                          <Table.Cell rowSpan={group.members.length}>{ group.group_name }</Table.Cell>
+                          <Table.Cell></Table.Cell>
+                          <Table.Cell></Table.Cell>
+                          <Table.Cell></Table.Cell>
+                        </Table.Row>
+                      )
+                    }
+
+                    return (
+                      <>
+                        <Table.Row key={index}>
+                          <Table.Cell rowSpan={group.members.length}>{ group.group_name }</Table.Cell>
+                          <Table.Cell>{ group.members[0].first_name }</Table.Cell>
+                          <Table.Cell>{ group.members[0].last_name }</Table.Cell>
+                          <Table.Cell>{ group.members[0].email_address }</Table.Cell>
+                        </Table.Row>
+                          {
+                            group.members.slice(1).map((member) => {
+                              return (
+                              <Table.Row>
+                                <Table.Cell>{ member.first_name }</Table.Cell>
+                                <Table.Cell>{ member.last_name }</Table.Cell>
+                                <Table.Cell>{ member.email_address }</Table.Cell>
+                              </Table.Row>
+                              );
+                            })
+                          }
+                        </>
+                    );
+                  })
               }
 
               </Table.Body>
