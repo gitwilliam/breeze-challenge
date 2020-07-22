@@ -1,13 +1,13 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import ResultsList from './ResultsList';
+import PeopleList from './PeopleList';
 
 let wrapper, data;
 
-describe('<ResultsList />', () => {
+describe('<PeopleList />', () => {
 
     beforeAll(() => {
-        wrapper = shallow(<ResultsList />)
+        wrapper = shallow(<PeopleList />)
         data = [{
             "id": 132,
             "first_name": "Macie",
@@ -18,7 +18,7 @@ describe('<ResultsList />', () => {
             "created_at": "2019-07-20 22:05:47"
         }]
 
-        wrapper.setState({ 'data' : data });
+        wrapper.setState({'column': null, 'data' : data, 'direction': null });
     });
 
     test('should match the snapshot', () => {

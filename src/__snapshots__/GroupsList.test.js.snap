@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<GroupsList /> should match the snapshot 1`] = `
+<Tab
+  grid={
+    Object {
+      "paneWidth": 12,
+      "tabWidth": 4,
+    }
+  }
+  menu={
+    Object {
+      "attached": true,
+      "tabular": true,
+    }
+  }
+  panes={
+    Array [
+      Object {
+        "menuItem": "Elders",
+        "pane": <TabPane
+          active={true}
+          as={[Function]}
+        >
+          <PeopleList
+            group_id={132}
+          />
+        </TabPane>,
+      },
+    ]
+  }
+  renderActiveOnly={false}
+/>
+`;
