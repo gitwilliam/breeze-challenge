@@ -9,6 +9,16 @@ class PeopleList extends Component {
     }
 
     componentDidMount() {
+      this.fetchData();
+    }
+
+    componentDidUpdate(prevProps) {
+      if (prevProps.is_file_loaded !== this.props.is_file_loaded) {
+        this.fetchData();
+      }
+    }
+
+    fetchData() {
       if (this.props.group_id) {
         fetch("http://localhost:8000/api/groups/" + this.props.group_id + "/members")
           .then(response => response.json())

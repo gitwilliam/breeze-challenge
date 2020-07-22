@@ -10,6 +10,16 @@ class GroupsList extends Component {
     }
 
     componentDidMount() {
+      this.fetchData();
+    }
+
+    componentDidUpdate(prevProps) {
+      if (prevProps.is_file_loaded !== this.props.is_file_loaded) {
+        this.fetchData();
+      }
+    }
+
+    fetchData() {
         fetch("http://localhost:8000/api/groups")
           .then(response => response.json())
           .then(data => this.setState({ data: data.data }));
@@ -19,7 +29,7 @@ class GroupsList extends Component {
         const data = this.state.data || [];
 
         const panes = data.map(group => {
-          return { menuItem: group.group_name, pane: <Tab.Pane key={group.id} ><PeopleList group_id={group.id} /></Tab.Pane>};
+          return { menuItem: group.group_name, pane: <Tab.Pane key={group.id} ><PeopleList group_id={group.id} is_file_loaded={this.props.is_file_loaded} /></Tab.Pane>};
         });
 
         return (<Tab renderActiveOnly={false} panes={panes} />);

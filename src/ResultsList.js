@@ -5,6 +5,11 @@ import GroupsList from "./GroupsList";
 import FileReader from "./FileReader";
 
 class ResultsList extends Component {
+    state = {
+      isFileLoaded: false
+    }
+    toggleFileLoaded = () => this.setState({isFileLoaded: !this.state.isFileLoaded});
+
     constructor(props) {
         super(props);
     }
@@ -12,9 +17,9 @@ class ResultsList extends Component {
     render() {
         return (
           <>
-          <FileReader />
-          <PeopleList />
-          <GroupsList />
+          <FileReader toggle_file_loaded={this.toggleFileLoaded} />
+          <PeopleList is_file_loaded={this.state.isFileLoaded} />
+          <GroupsList is_file_loaded={this.state.isFileLoaded} />
           </>
         );
 }

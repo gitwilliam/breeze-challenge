@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import Papa from 'papaparse'
 
 class FileReader extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       csvfile: undefined
     };
@@ -25,29 +25,32 @@ class FileReader extends React.Component {
   };
 
   sendData(result) {
+      let promises = [];
       if (result.meta.fields.includes("first_name") && result.meta.fields.includes("last_name")) {
           result.data.forEach((p) => {
-              fetch('http://127.0.0.1:8000/api/people/', {
+              promises.push(fetch('http://127.0.0.1:8000/api/people/', {
                   method: 'POST',
                   headers: {
                       'Accept': 'application/json',
                       'Content-Type': 'application/json',
                   },
                   body: JSON.stringify(p)
-              })
+              }));
           });
       } else if (result.meta.fields.includes("group_name") && !result.meta.fields.includes("first_name")) {
           result.data.forEach((p) => {
-              fetch('http://127.0.0.1:8000/api/groups/', {
+              promises.push(fetch('http://127.0.0.1:8000/api/groups/', {
                   method: 'POST',
                   headers: {
                       'Accept': 'application/json',
                       'Content-Type': 'application/json',
                   },
                   body: JSON.stringify(p)
-              })
+              }));
           });
       }
+
+      Promise.all(promises).then(() => this.props.toggle_file_loaded());
   }
 
   render() {
