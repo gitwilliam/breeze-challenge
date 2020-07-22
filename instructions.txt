@@ -1,0 +1,42 @@
+Breeze,
+
+I appreciate the fun chat with Janet the other day and the opportunity to attempt a solution to this coding exercise.
+
+I have not used Laravel or React in a professional capacity.  It took me longer than I had hoped, and there is still 
+more that I would have liked to do; but I told my wife I would finish it this evening.
+
+   * The React application needs unit testing.
+   * The API application needs additional unit testing/api testing.
+   * Additional file input validation and reporting to the user is needed.
+   * A progress bar would be really nice for the uploading, even I got nervous sometimes.
+   * And it needs to be more responsive (i.e. popping data in the tables as it is loaded).
+
+
+Instructions to the end-user:
+
+To import a People CSV and Groups CSV file into the Breeze Church Management,
+
+1) Format the People CSV file in the following way,
+first_name,last_name,email_address,status,group_id
+Mary,Brandybuck,mary@theshire.net,active,4
+Samwise,Gamgee,samwise@theshire.net,active,5
+Bilbo,Baggins,billbo@theshire.net,active,5
+Frodo,Baggins,frodo@theshire.net,active,6
+Gandalf,Wizard,gandlaf@theshire.net,archived,6
+
+2) Format the Groups CSV file in the following way,
+id,group_name
+4,Staff
+5,Elders
+6,Choir
+
+3) Upload both files one at a time by 
+   3a) Selecting the "Choose File" button, 
+   3b) Selecting the file of choice, 
+   3c) And then selecting "Upload"
+
+4) The table on top will update with all the People in the system (Active and Archived)
+5) The tabbed table on the bottom will display a tab for each Group.  Each tabs contains a table with all Active members of the Group.
+
+Watch a video demonstration here: https://youtu.be/g8ULfM6f-Z0
+
