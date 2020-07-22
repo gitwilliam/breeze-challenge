@@ -10,10 +10,6 @@ class ResultsList extends Component {
     }
     toggleFileLoaded = () => this.setState({isFileLoaded: !this.state.isFileLoaded});
 
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
           <>
