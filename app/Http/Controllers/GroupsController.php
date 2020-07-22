@@ -19,7 +19,7 @@ class GroupsController extends Controller
     public function members($id)
     {
         $members = Group::where('id', $id)->first()->members;
-        return response()->json(["data" => $members], 200);
+        return response()->json(["data" => $members], 201);
     }
 
     /**
