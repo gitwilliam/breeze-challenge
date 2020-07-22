@@ -14,7 +14,7 @@ class AddGroupIdColumnToPeopleTable extends Migration
     public function up()
     {
         Schema::table('people', function($table) {
-            $table->integer('group_id');
+            $table->integer('group_id')->nullable();
         });
     }
 
